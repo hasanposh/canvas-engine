@@ -1,12 +1,42 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
-  const [theme, setTheme] = useState("light");
+  const navLink = (
+    <>
+      <li>
+        <NavLink
+          className={({ isActive }) => (isActive ? "text-blue-400" : "")}
+          to={"/"}
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) => (isActive ? "text-blue-400" : "")}
+          to={"/login"}
+        >
+          Login
+        </NavLink>
+      </li>
+      <li className="w-32">
+        <NavLink
+          className={({ isActive }) => (isActive ? "text-blue-400" : "")}
+          to={"/myCraftList"}
+        >
+          My Craft List
+        </NavLink>
+      </li>
+    </>
+  );
+
+  const [theme, setTheme] = useState("night");
   const TOP_OFFSET = 50;
   const [showBackground, setShowBackground] = useState(false);
   const toggleTheme = () => {
-    setTheme(theme === "aqua" ? "light" : "aqua");
+    setTheme(theme === "light" ? "night" : "light");
   };
   useEffect(() => {
     document.querySelector("html").setAttribute("data-theme", theme);
@@ -32,7 +62,7 @@ const NavBar = () => {
   return (
     <div className="sticky top-0 z-10 w-full  backdrop-filter backdrop-blur-lg">
       <div
-        className={`navbar  ${
+        className={`navbar px-20  ${
           showBackground ? "bg-opacity-30" : "bg-transparent"
         }`}
       >
@@ -58,54 +88,48 @@ const NavBar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
+              {navLink}
+            </ul>
+          </div>
+          <Link to={"/"} className=" font-bold text-4xl">
+            Canvas <span className="text-blue-400">Engine</span>
+          </Link>
+        </div>
+        <div className=" hidden lg:flex">
+          <ul className=" menu-horizontal gap-3">{navLink}</ul>
+        </div>
+        <div className="navbar-end">
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full">
+                <img
+                  alt="Tailwind CSS Navbar component"
+                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                />
+              </div>
+            </div>
+            <ul
+              tabIndex={0}
+              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+            >
               <li>
-                <a>Item 1</a>
+                <a className="justify-between">
+                  Profile
+                  <span className="badge">New</span>
+                </a>
               </li>
               <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
+                <a>Settings</a>
               </li>
               <li>
-                <a>Item 3</a>
+                <a>Logout</a>
               </li>
             </ul>
           </div>
-          <a className="btn font-bold btn-ghost text-4xl">
-            Canvas <span className="text-blue-400">Engine</span>
-          </a>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </details>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul>
-        </div>
-        <div className="navbar-end">
-          <a className="btn">Button</a>
           <label className="swap swap-rotate">
             {/* this hidden checkbox controls the state */}
             <input

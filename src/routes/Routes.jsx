@@ -3,6 +3,8 @@ import Root from "../layout/Root";
 import ErrorPage from "../pages/ErrorPage";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
+import Registration from "../pages/Registration";
+import MyCraftList from "../pages/MyCraftList";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +22,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/registration",
-        element: <Login />,
+        element: <Registration />,
+      },
+      {
+        path: "/myCraftList",
+        element: <MyCraftList />,
       },
     ],
   },
