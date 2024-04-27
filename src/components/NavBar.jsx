@@ -1,8 +1,23 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
+import "react-tooltip/dist/react-tooltip.css";
+import { Tooltip } from "react-tooltip";
 
 const NavBar = () => {
+  const { user, signOutUser } = useContext(AuthContext);
+  // console.log(user.photoURL)
+  const handleSignOut = () => {
+    signOutUser()
+      .then((request) => {
+        console.log(request.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const navLink = (
     <>
       <li>
@@ -13,22 +28,35 @@ const NavBar = () => {
           Home
         </NavLink>
       </li>
-      <li>
+      <li className="w-[140px]">
         <NavLink
           className={({ isActive }) => (isActive ? "text-blue-400" : "")}
-          to={"/login"}
+          to={"/allArtAndCraftItems"}
         >
-          Login
+          All Art & craft Items
         </NavLink>
       </li>
-      <li className="w-32">
-        <NavLink
-          className={({ isActive }) => (isActive ? "text-blue-400" : "")}
-          to={"/myCraftList"}
-        >
-          My Craft List
-        </NavLink>
-      </li>
+
+      {user && (
+        <>
+          <li className="w-[110px]">
+            <NavLink
+              className={({ isActive }) => (isActive ? "text-blue-400" : "")}
+              to={"/addCraftItem"}
+            >
+              Add Craft Item
+            </NavLink>
+          </li>
+          <li className="w-[132px]">
+            <NavLink
+              className={({ isActive }) => (isActive ? "text-blue-400" : "")}
+              to={"/myCraftList"}
+            >
+              My Art & Craft List
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
@@ -60,7 +88,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div className="sticky top-0 z-10 w-full  backdrop-filter backdrop-blur-lg">
+    <div className="sticky top-0 z-10 w-full border-b-2 backdrop-filter backdrop-blur-lg">
       <div
         className={`navbar px-20  ${
           showBackground ? "bg-opacity-30" : "bg-transparent"
@@ -99,38 +127,53 @@ const NavBar = () => {
           <ul className=" menu-horizontal gap-3">{navLink}</ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                />
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div
+                  data-tooltip-id="my-tooltip"
+                  data-tooltip-content={user.displayName}
+                  className="w-10 rounded-full"
+                >
+                  <Tooltip id="my-tooltip" />
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src={user.photoURL}
+                  />
+                </div>
               </div>
+
+              <ul
+                tabIndex={0}
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <a className="justify-between">
+                    Profile
+                    <span className="badge">New</span>
+                  </a>
+                </li>
+
+                <li>
+                  <button onClick={handleSignOut}>Logout</button>
+                </li>
+              </ul>
             </div>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
-          <label className="swap swap-rotate">
+          ) : (
+            <>
+              <Link className="btn bg-blue-400 text-white" to={"/login"}>
+                Login
+              </Link>
+              <Link className="btn bg-blue-400 text-white" to={"/registration"}>
+                Registration
+              </Link>
+            </>
+          )}
+          <label className="swap pl-4 swap-rotate">
             {/* this hidden checkbox controls the state */}
             <input
               type="checkbox"
