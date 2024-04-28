@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import { toast } from "react-toastify";
 
 const AddCraftItem = () => {
   const { user } = useContext(AuthContext);
@@ -17,6 +18,7 @@ const AddCraftItem = () => {
     const description = form.description.value;
     const stock_status = form.stock_status.value;
     const processing_time = form.processing_time.value;
+    const price = form.price.value;
 
     const newCraftItem = {
       image,
@@ -29,9 +31,26 @@ const AddCraftItem = () => {
       description,
       stock_status,
       processing_time,
+      price,
     };
 
     console.log(newCraftItem);
+
+    // sent data to server
+    fetch("http://localhost:5000/artAndCraft", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newCraftItem),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          toast("Craft Added successfully");
+        }
+      });
   };
   return (
     <div className="text-center w-full md:p-24 p-10 space-y-10 ">
@@ -55,6 +74,7 @@ const AddCraftItem = () => {
           <label className="input input-bordered bg-white text-black flex-1 flex items-center gap-2">
             User Name
             <input
+         
               type="text"
               name="user_name"
               placeholder="Enter Your Name"
@@ -64,6 +84,7 @@ const AddCraftItem = () => {
           <label className="input input-bordered bg-white text-black flex-1 flex items-center gap-2">
             User Email
             <input
+            className=" w-2/3"
               type="text"
               name="user_Email"
               placeholder="Enter coffee taste"
@@ -81,7 +102,9 @@ const AddCraftItem = () => {
               >
                 <option value="Landscape Painting">Landscape Painting</option>
                 <option value="Portrait Drawing">Portrait Drawing</option>
-                <option value="Watercolour Painting">Watercolour Painting</option>
+                <option value="Watercolour Painting">
+                  Watercolour Painting
+                </option>
                 <option value="Oil Painting">Oil Painting</option>
                 <option value="Charcoal Sketching">Charcoal Sketching</option>
                 <option value="Cartoon Drawing">Cartoon Drawing</option>
@@ -97,30 +120,9 @@ const AddCraftItem = () => {
               </div>
             </div>
           </label>
-
-          <label className="input input-bordered flex-1 bg-white text-black flex items-center gap-2">
+          <label className="input input-bordered bg-white text-black flex-1 flex items-center gap-2">
             Rating
-            <div className="relative">
-              <select
-                className="appearance-none border-none py-2 px-4 bg-white leading-tight focus:outline-none focus:border-blue-500"
-                name="rating"
-              >
-                <option value="1">1 </option>
-                <option value="2">2 </option>
-                <option value="3">3 </option>
-                <option value="4">4 </option>
-                <option value="5">5 </option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 -right-3 flex items-center px-2 text-gray-700">
-                <svg
-                  className="fill-current h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M5 7l5 5 5-5z" />
-                </svg>
-              </div>
-            </div>
+            <input type="text" name="rating" placeholder="Enter Your Rating" />
           </label>
 
           <label className="input input-bordered flex-1 bg-white text-black flex items-center gap-2">

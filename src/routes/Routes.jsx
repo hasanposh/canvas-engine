@@ -38,10 +38,13 @@ const router = createBrowserRouter([
             <MyCraftList />
           </PrivateRoutes>
         ),
+        loader: () => fetch("http://localhost:5000/artAndCraft"),
+
       },
       {
         path: "/allArtAndCraftItems",
         element: <AllArtAndCraftItems />,
+        loader: () => fetch("http://localhost:5000/artAndCraft"),
       },
       {
         path: "/addCraftItem",
