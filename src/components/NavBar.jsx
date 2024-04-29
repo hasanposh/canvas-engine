@@ -31,7 +31,7 @@ const NavBar = () => {
       <li className="w-[140px]">
         <NavLink
           className={({ isActive }) => (isActive ? "text-blue-400" : "")}
-          to={"/allArtAndCraftItems"}
+          to={"/artAndCraft"}
         >
           All Art & craft Items
         </NavLink>

@@ -55,6 +55,8 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+ 
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUSer) => {
       console.log("auth state", currentUSer);
@@ -76,7 +78,7 @@ const AuthProvider = ({ children }) => {
     setLoading,
     setUser,
     signInWithGoogle,
-    signInWithGitHub
+    signInWithGitHub,
   };
   return (
     <div>

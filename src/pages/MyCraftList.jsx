@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { useContext, useState } from "react";
+import Swal from "sweetalert2";
 
 const MyCraftList = () => {
   const artAndCraft = useLoaderData();
@@ -8,6 +9,9 @@ const MyCraftList = () => {
   const myArtAndCraft = artAndCraft.filter(
     (data) => data.user_Email == user.email
   );
+
+const [crafts,setCrafts] = useState(myArtAndCraft)
+
   const [customization, setCustomization] = useState([]);
 
   const handleOptionClick = (value) => {
@@ -15,7 +19,38 @@ const MyCraftList = () => {
       (a) => a.customization == value
     );
     setCustomization(customizedData);
-   
+  };
+
+  const handleDelete = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/artAndCraft/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your coffee has been deleted.",
+                icon: "success",
+              });
+              // Filter out the deleted item from the current crafts state
+              setCrafts(prevCrafts => prevCrafts.filter(craft => craft._id !== id));
+            }
+          });
+      }
+    });
   };
   return (
     <div className="min-h-[calc(100vh-339px)]">
@@ -44,35 +79,40 @@ const MyCraftList = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-5">
-          {(customization.length > 0 ? customization : myArtAndCraft).map((data) => {
-            return (
-              <div
-                key={data.id}
-                className="card bg-base-100 border-2 shadow-xl"
-              >
-                <figure>
-                  <img src={data.image} alt="image" />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">{data.item_name}</h2>
-                  <div className="flex justify-between">
-                    <p>Price : {data.price}</p>
-                    <p>Rating : {data.rating}</p>
-                    <p>Customization : {data.customization}</p>
-                  </div>
-                  <p>Stock Status : {data.stock_status}</p>
-                  <div className="card-actions justify-end">
-                    <button className="btn bg-blue-400 text-white">
-                      Update
-                    </button>
-                    <button className="btn bg-red-700 text-white">
-                      Delete
-                    </button>
+          {(customization.length > 0 ? customization : crafts).map(
+            (data) => {
+              return (
+                <div
+                  key={data.id}
+                  className="card bg-base-100 border-2 shadow-xl"
+                >
+                  <figure>
+                    <img src={data.image} alt="image" />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">{data.item_name}</h2>
+                    <div className="flex justify-between">
+                      <p>Price : {data.price}</p>
+                      <p>Rating : {data.rating}</p>
+                      <p>Customization : {data.customization}</p>
+                    </div>
+                    <p>Stock Status : {data.stock_status}</p>
+                    <div className="card-actions justify-end">
+                      <button className="btn bg-blue-400 text-white">
+                        Update
+                      </button>
+                      <button
+                        onClick={() => handleDelete(data._id)}
+                        className="btn bg-red-700 text-white"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            }
+          )}
         </div>
       </div>
     </div>
