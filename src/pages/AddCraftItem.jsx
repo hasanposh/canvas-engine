@@ -51,6 +51,7 @@ const AddCraftItem = () => {
           toast("Craft Added successfully");
         }
       });
+      form.current.reset()
   };
   return (
     <div className="text-center w-full md:p-24 p-10 space-y-10 ">

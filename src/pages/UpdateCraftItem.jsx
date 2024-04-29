@@ -58,11 +58,13 @@ const UpdateCraftItem = () => {
         console.log(data);
         if (data.modifiedCount > 0) {
           toast("Craft Updated successfully");
+          
         }
       })
       .catch((err) => {
         console.log(err);
       });
+      
   };
   return (
     <div className="text-center w-full md:p-24 p-10 space-y-10 ">
