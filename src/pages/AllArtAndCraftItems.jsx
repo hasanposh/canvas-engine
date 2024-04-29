@@ -55,7 +55,7 @@ const AllArtAndCraftItems = () => {
                   </td>
                   <td className="p-3 text-right">
                     <span className="px-3 py-1 font-semibold rounded-md dark:bg-blue-400 dark:text-gray-50">
-                      <Link to={`/artAndCraft/${item._id}`}>
+                      <Link to={`/artAndCraft/craftDetails/${item._id}`}>
                         Details
                       </Link>
                     </span>

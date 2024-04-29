@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { useContext, useState } from "react";
 import Swal from "sweetalert2";
@@ -10,7 +10,7 @@ const MyCraftList = () => {
     (data) => data.user_Email == user.email
   );
 
-const [crafts,setCrafts] = useState(myArtAndCraft)
+  const [crafts, setCrafts] = useState(myArtAndCraft);
 
   const [customization, setCustomization] = useState([]);
 
@@ -45,7 +45,9 @@ const [crafts,setCrafts] = useState(myArtAndCraft)
                 text: "Your craft has been deleted.",
                 icon: "success",
               });
-              setCrafts(prevCrafts => prevCrafts.filter(craft => craft._id !== id));
+              setCrafts((prevCrafts) =>
+                prevCrafts.filter((craft) => craft._id !== id)
+              );
             }
           });
       }
@@ -78,40 +80,40 @@ const [crafts,setCrafts] = useState(myArtAndCraft)
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-5">
-          {(customization.length > 0 ? customization : crafts).map(
-            (data) => {
-              return (
-                <div
-                  key={data.id}
-                  className="card bg-base-100 border-2 shadow-xl"
-                >
-                  <figure>
-                    <img src={data.image} alt="image" />
-                  </figure>
-                  <div className="card-body">
-                    <h2 className="card-title">{data.item_name}</h2>
-                    <div className="flex justify-between">
-                      <p>Price : {data.price}</p>
-                      <p>Rating : {data.rating}</p>
-                      <p>Customization : {data.customization}</p>
-                    </div>
-                    <p>Stock Status : {data.stock_status}</p>
-                    <div className="card-actions justify-end">
+          {(customization.length > 0 ? customization : crafts).map((data) => {
+            return (
+              <div
+                key={data.id}
+                className="card bg-base-100 border-2 shadow-xl"
+              >
+                <figure>
+                  <img src={data.image} alt="image" />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title">{data.item_name}</h2>
+                  <div className="flex justify-between">
+                    <p>Price : {data.price}</p>
+                    <p>Rating : {data.rating}</p>
+                    <p>Customization : {data.customization}</p>
+                  </div>
+                  <p>Stock Status : {data.stock_status}</p>
+                  <div className="card-actions justify-end">
+                    <Link to={`/artAndCraft/${data._id}`}>
                       <button className="btn bg-blue-400 text-white">
                         Update
                       </button>
-                      <button
-                        onClick={() => handleDelete(data._id)}
-                        className="btn bg-red-700 text-white"
-                      >
-                        Delete
-                      </button>
-                    </div>
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(data._id)}
+                      className="btn bg-red-700 text-white"
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
-              );
-            }
-          )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
