@@ -94,7 +94,7 @@ const Footer = () => {
               <div className="flex justify-start space-x-3">
                 <a
                   rel="noopener noreferrer"
-                  href="#"
+                  href="https://www.facebook.com/"
                   title="Facebook"
                   className="flex items-center p-1"
                 >
@@ -109,7 +109,7 @@ const Footer = () => {
                 </a>
                 <a
                   rel="noopener noreferrer"
-                  href="#"
+                  href="https://twitter.com/"
                   title="Twitter"
                   className="flex items-center p-1"
                 >
@@ -123,7 +123,7 @@ const Footer = () => {
                 </a>
                 <a
                   rel="noopener noreferrer"
-                  href="#"
+                  href="https://www.instagram.com/"
                   title="Instagram"
                   className="flex items-center p-1"
                 >
@@ -141,7 +141,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="py-6 text-sm text-center">
-          © 1968 Company Co. All rights reserved.
+          © 2024 Canvas Engine Company Co. All rights reserved.
         </div>
       </footer>
     </div>
