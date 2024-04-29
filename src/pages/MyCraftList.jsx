@@ -42,10 +42,9 @@ const [crafts,setCrafts] = useState(myArtAndCraft)
             if (data.deletedCount > 0) {
               Swal.fire({
                 title: "Deleted!",
-                text: "Your coffee has been deleted.",
+                text: "Your craft has been deleted.",
                 icon: "success",
               });
-              // Filter out the deleted item from the current crafts state
               setCrafts(prevCrafts => prevCrafts.filter(craft => craft._id !== id));
             }
           });
