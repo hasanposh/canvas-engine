@@ -90,7 +90,7 @@ const NavBar = () => {
   return (
     <div className="sticky top-0 z-10 w-full border-b-2 backdrop-filter backdrop-blur-lg">
       <div
-        className={`navbar px-20  ${
+        className={`navbar lg:px-20  ${
           showBackground ? "bg-opacity-30" : "bg-transparent"
         }`}
       >
