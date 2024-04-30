@@ -33,7 +33,7 @@ const MyCraftList = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/artAndCraft/${id}`, {
+        fetch(`https://art-and-craft-store-server-one.vercel.app/artAndCraft/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

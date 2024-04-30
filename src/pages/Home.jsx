@@ -12,7 +12,7 @@ const Home = () => {
   //   const categories = useLoaderData();
   const firstSixProducts = allProducts.slice(0, 6);
   useEffect(() => {
-    fetch("http://localhost:5000/categories")
+    fetch("https://art-and-craft-store-server-one.vercel.app/categories")
       .then((res) => res.json())
       .then((data) => {
         setCategoriesData(data);

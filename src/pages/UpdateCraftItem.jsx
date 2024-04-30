@@ -46,7 +46,7 @@ const UpdateCraftItem = () => {
 
     console.log(updateCraft);
 
-    fetch(`http://localhost:5000/artAndCraft/${_id}`, {
+    fetch(`https://art-and-craft-store-server-one.vercel.app/artAndCraft/${_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
