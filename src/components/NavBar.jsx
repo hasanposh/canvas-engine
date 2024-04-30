@@ -119,14 +119,14 @@ const NavBar = () => {
               {navLink}
             </ul>
           </div>
-          <Link to={"/"} className=" font-bold text-4xl">
+          <Link to={"/"} className=" font-bold text-xl md:text-4xl">
             Canvas <span className="text-blue-400">Engine</span>
           </Link>
         </div>
         <div className=" hidden lg:flex">
           <ul className=" menu-horizontal gap-3">{navLink}</ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end w-full md:w-1/2 justify-between md:justify-end">
           {user ? (
             <div className="dropdown dropdown-end">
               <div
