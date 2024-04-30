@@ -3,10 +3,21 @@ import HomeSlider from "../components/HomeSlider";
 import ProductCard from "../components/ProductCard";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import ContactForm from "../components/ContactForm";
+import { useEffect, useState } from "react";
+import CategoryCard from "../components/CategoryCard";
 
 const Home = () => {
   const allProducts = useLoaderData();
+  const [categoriesData, setCategoriesData] = useState([]);
+  //   const categories = useLoaderData();
   const firstSixProducts = allProducts.slice(0, 6);
+  useEffect(() => {
+    fetch("http://localhost:5000/categories")
+      .then((res) => res.json())
+      .then((data) => {
+        setCategoriesData(data);
+      });
+  }, []);
   return (
     <div className="space-y-8">
       <HomeSlider></HomeSlider>
@@ -18,9 +29,19 @@ const Home = () => {
           );
         })}
       </div>
+
       <div className="container mx-auto gap-2 flex text-xl justify-center items-center">
         <Link to={"/artAndCraft"}>Check Our All Product </Link>
         <FaLongArrowAltRight />
+      </div>
+      <div>
+        <h2 className="text-5xl text-center my-5">Choose a category</h2>
+        <div className="container mx-auto gap-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {categoriesData.map((category) => (
+          <CategoryCard category={category} key={category._id} />
+        ))}
+
+        </div>
       </div>
       <div className="container mx-auto ">
         <h2 className="text-5xl py-5 text-center">
@@ -30,8 +51,9 @@ const Home = () => {
           <div className="card card-compact w-96 bg-base-100 shadow-xl">
             <figure className="object-cover">
               <img
-              
-                src={'https://images.pexels.com/photos/2613260/pexels-photo-2613260.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'}
+                src={
+                  "https://images.pexels.com/photos/2613260/pexels-photo-2613260.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                }
                 alt="image"
               />
             </figure>
@@ -46,8 +68,9 @@ const Home = () => {
           <div className="card card-compact w-96 bg-base-100 shadow-xl">
             <figure className="object-cover">
               <img
-              
-                src={'https://images.pexels.com/photos/6507483/pexels-photo-6507483.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'}
+                src={
+                  "https://images.pexels.com/photos/6507483/pexels-photo-6507483.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                }
                 alt="image"
               />
             </figure>
@@ -62,8 +85,9 @@ const Home = () => {
           <div className="card card-compact w-96 bg-base-100 shadow-xl">
             <figure className="object-cover">
               <img
-              
-                src={'https://images.pexels.com/photos/5611966/pexels-photo-5611966.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'}
+                src={
+                  "https://images.pexels.com/photos/5611966/pexels-photo-5611966.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                }
                 alt="image"
               />
             </figure>
@@ -78,11 +102,7 @@ const Home = () => {
         </div>
       </div>
       <div>
-        <h2 className="text-5xl py-5 text-center">
-          You Can Also <br /> Contact With US 
-          
-        </h2>
-        <ContactForm/>
+        <ContactForm />
       </div>
     </div>
   );

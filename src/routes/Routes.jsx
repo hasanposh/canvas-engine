@@ -10,6 +10,7 @@ import AddCraftItem from "../pages/AddCraftItem";
 import PrivateRoutes from "./PrivateRoutes";
 import CraftDetails from "../pages/CraftDetails";
 import UpdateCraftItem from "../pages/UpdateCraftItem";
+import CategoryData from "../pages/CategoryData";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,15 @@ const router = createBrowserRouter([
             <AddCraftItem />
           </PrivateRoutes>
         ),
+      },
+      {
+        path: "/categories/:subCategory",
+        element: (
+          <PrivateRoutes>
+            <CategoryData />
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) => fetch(`http://localhost:5000/artAndCraft/categories/${params.subCategory}`)
       },
     ],
   },
