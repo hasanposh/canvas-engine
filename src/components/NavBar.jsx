@@ -126,7 +126,7 @@ const NavBar = () => {
         <div className=" hidden lg:flex">
           <ul className=" menu-horizontal gap-3">{navLink}</ul>
         </div>
-        <div className="navbar-end w-full md:w-1/2 justify-between md:justify-end">
+        <div className="navbar-end w-full md:w-1/2 ">
           {user ? (
             <div className="dropdown dropdown-end">
               <div
