@@ -1,7 +1,8 @@
 # Canvas Engine
 
 
-- [Live Link](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) 
+- [Live Link](https://art-and-craft-store-8a3b0.web.app/) 
+- [Live Link](https://github.com/hasanposh/canvas-engine-server) 
 
 Features and characteristics of this website:
 
@@ -14,4 +15,25 @@ Features and characteristics of this website:
 - Here are 2 npm packages name which i used in this project.
 - 1. react-tooltip
 - 2. react-simple-typewriter
+ 
+## Technologies Used
+- **Frontend**: React.js
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Authentication**: Social Login,firebase
+
+
+## Installation Steps
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+
+2. **Install dependencies**:
+   ```bash
+   cd project-directory
+   npm install
+2. **Set up environment variables**:
+
+  - Create a .env file in the root directory.
+  - Add necessary variables (e.g., database connection).
 
