@@ -2,7 +2,7 @@
 
 
 - [Live Link](https://art-and-craft-store-8a3b0.web.app/) 
-- [Live Link](https://github.com/hasanposh/canvas-engine-server) 
+- [Server Link](https://github.com/hasanposh/canvas-engine-server) 
 
 Features and characteristics of this website:
 
